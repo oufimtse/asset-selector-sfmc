@@ -21,12 +21,20 @@
 
             /// Use the PureJSSelectors in globals to render the AssetSelector/DestinationSelector component
             PureJSSelectors.renderAssetSelectorWithAuthFlow(container, assetSelectorProps, async() => {
-                const popupUrl = await constructPopupUrl(registeredTokenService);
-                window.open(popupUrl, '_blank');
+                const assetSelectorDialog = document.getElementById('asset-selector-dialog');
+                assetSelectorDialog.showModal();
+                // const popupUrl = await constructPopupUrl(registeredTokenService);
+                // window.open(popupUrl, '_blank');
             });
         }
 
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
+
+        registeredTokenService.adobeIms.signInservice._signIn = registeredTokenService.adobeIms.signInservice.signIn;
+        registeredTokenService.adobeIms.signInservice.signIn = async ( redirectRequest ) => {
+            console.log('=== signIn');
+            this._signIn( redirectRequest );
+        };
 
     </script>
 </head>
