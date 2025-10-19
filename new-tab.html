@@ -21,6 +21,11 @@
             window.assetsSelectorsAuthService.adobeIms.signInservice._signIn = window.assetsSelectorsAuthService.adobeIms.signInservice.signIn;
             window.assetsSelectorsAuthService.adobeIms.signInservice.signIn = async function( redirectRequest ) {
                 console.log('=== signIn');
+                window._open = window.open;
+                window.open = function( url, target, features ) {
+                    console.log('=== open', url, target, features);
+                    return window._open( url, target, features );
+                };
                 this._signIn( redirectRequest );
             };
 
