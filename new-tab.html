@@ -19,6 +19,13 @@
             // container element on which you want to render the AssetSelector/DestinationSelector component
             const container = document.getElementById('asset-selector');
 
+            window.assetsSelectorsAuthService.adobeIms.signInservice._signIn = window.assetsSelectorsAuthService.adobeIms.signInservice.signIn;
+            window.assetsSelectorsAuthService.adobeIms.signInservice.signIn = async ( redirectRequest ) => {
+                console.log('=== signIn');
+                this._signIn( redirectRequest );
+            };
+
+
             /// Use the PureJSSelectors in globals to render the AssetSelector/DestinationSelector component
             PureJSSelectors.renderAssetSelectorWithAuthFlow(container, assetSelectorProps, async() => {
                 const assetSelectorDialog = document.getElementById('asset-selector-dialog');
@@ -30,11 +37,6 @@
 
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
 
-        registeredTokenService.adobeIms.signInservice._signIn = registeredTokenService.adobeIms.signInservice.signIn;
-        registeredTokenService.adobeIms.signInservice.signIn = async ( redirectRequest ) => {
-            console.log('=== signIn');
-            this._signIn( redirectRequest );
-        };
 
     </script>
 </head>
