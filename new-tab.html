@@ -22,8 +22,6 @@
                 window.open = window._open;
             };
 
-
-            /// Use the PureJSSelectors in globals to render the AssetSelector/DestinationSelector component
             PureJSSelectors.renderAssetSelectorWithAuthFlow(container, assetSelectorProps, async() => {
                 const assetSelectorDialog = document.getElementById('asset-selector-dialog');
                 assetSelectorDialog.showModal();
