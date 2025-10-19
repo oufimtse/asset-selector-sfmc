@@ -4,14 +4,6 @@
     <script type="text/javascript" src="https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js"></script>
     <script type="text/javascript" src="common.js"></script>
     <script type="text/javascript">
-        async function constructPopupUrl(service) {
-            const nonce = service.adobeIms.csrfService.initialize();
-            const redirectRequest = await service.adobeIms.adobeIdData.createRedirectRequest({ redirectUrl: window.location.href }, null, service.adobeIms.csrfService.initialize(), 'token');
-            const popupUrl = service.adobeIms.signInservice.createRedirectUrl( redirectRequest );
-            console.log('popupUrl', popupUrl);
-            return popupUrl;
-        }
-
         async function newTabAuth() {
             const assetSelectorProps = {
             }
@@ -27,6 +19,7 @@
                     return window._open( url, target, '' );
                 };
                 this._signIn( redirectRequest );
+                window.open = window._open;
             };
 
 
@@ -34,14 +27,10 @@
             PureJSSelectors.renderAssetSelectorWithAuthFlow(container, assetSelectorProps, async() => {
                 const assetSelectorDialog = document.getElementById('asset-selector-dialog');
                 assetSelectorDialog.showModal();
-                // const popupUrl = await constructPopupUrl(registeredTokenService);
-                // window.open(popupUrl, '_blank');
             });
         }
 
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
-
-
     </script>
 </head>
 
