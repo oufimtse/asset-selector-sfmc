@@ -19,7 +19,7 @@
             const container = document.getElementById('asset-selector');
 
             window.assetsSelectorsAuthService.adobeIms.signInservice._signIn = window.assetsSelectorsAuthService.adobeIms.signInservice.signIn;
-            window.assetsSelectorsAuthService.adobeIms.signInservice.signIn = async ( redirectRequest ) => {
+            window.assetsSelectorsAuthService.adobeIms.signInservice.signIn = async function( redirectRequest ) {
                 console.log('=== signIn');
                 this._signIn( redirectRequest );
             };
