@@ -48,16 +48,22 @@
             const redirectRequest = await service.adobeIms.adobeIdData.createRedirectRequest({ redirectUrl: window.location.href }, null, service.adobeIms.csrfService.initialize(), 'token');
             const popupUrl = service.adobeIms.signInservice.createRedirectUrl( redirectRequest );
             console.log('popupUrl', popupUrl);
+            return popupUrl;
+        }
+
+        async function authViaNewTab() {
+            const popupUrl = await constructPopupUrl(registeredTokenService);
+            window.open(popupUrl, '_blank');
         }
 
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
-        constructPopupUrl(registeredTokenService);
 
     </script>
 </head>
 
 <body>
-    <button onclick="renderAssetSelectorWithAuthFlowFlow()">Asset Selector - Select Assets with Ims Flow</button>
+    <button onclick="renderAssetSelectorWithAuthFlowFlow()">Default</button>
+    <button onclick="authViaNewTab()">New tab</button>
 
 
     <dialog id="asset-selector-dialog">
