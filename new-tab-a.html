@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript">
+
+        const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
+
+        async function constructSusiUrl(service) {
+            const nonce = service.adobeIms.csrfService.initialize();
+            const redirectRequest = await service.adobeIms.adobeIdData.createRedirectRequest({ redirectUrl: window.location.href }, null, service.adobeIms.csrfService.initialize(), 'token');
+            const popupUrl = service.adobeIms.signInservice.createRedirectUrl( redirectRequest );
+            console.log('popupUrl', popupUrl);
+            return popupUrl;
+        }
+
+        async function setupSusiUrl() {
+            const susiTrigger = document.getElementById('susi-trigger');
+            const susiUrl = await constructSusiUrl(registeredTokenService);
+            susiTrigger.href = susiUrl;
+        }
+
+        setupSusiUrl();
+</script>
+</head>
+
+<body>
+    <a id="susi-trigger" href="">New tab auth</a>
+
+    <dialog id="asset-selector-dialog">
+        <div id="asset-selector" style="height: calc(100vh - 80px); width: calc(100vw - 60px); margin: -20px;">
+        </div>
+    </dialog>
+</body>
+</html>
