@@ -24,7 +24,7 @@
                 window._open = window.open;
                 window.open = function( url, target, features ) {
                     console.log('=== open', url, target, features);
-                    return window._open( url, target, features );
+                    return window._open( url, target, '' );
                 };
                 this._signIn( redirectRequest );
             };
