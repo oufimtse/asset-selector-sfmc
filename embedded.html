@@ -18,6 +18,13 @@
         }
 
         imsProps.modalMode = false;
+        imsProps.onAccessTokenReceived = (token) => {
+            if (token.token) {
+                console.log('showing modal: onAccessTokenReceived', token);
+                const assetSelectorDialog = document.getElementById('asset-selector-dialog');
+                assetSelectorDialog.showModal();
+            }
+        };
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
     </script>
 </head>
