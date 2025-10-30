@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <button id="susi-trigger" onclick="defaultPopupAuth()" style="display: none;">Default popup auth</button>
+    <button id="susi-trigger" onclick="defaultPopupAuth()" style="display: none;">Dynamic popup auth</button>
 
     <dialog id="asset-selector-dialog">
         <div id="asset-selector" style="height: calc(100vh - 80px); width: calc(100vw - 60px); margin: -20px;">
@@ -29,6 +29,7 @@
         const registeredTokenService = PureJSSelectors.registerAssetsSelectorsAuthService(imsProps);
         const isSignedInUser = registeredTokenService.isSignedInUser();
         console.log(`=== is signed in user: ${isSignedInUser}`);
+        
         if (isSignedInUser) {
             const token = registeredTokenService.getImsToken();
             console.log(`=== token: ${token}`);
