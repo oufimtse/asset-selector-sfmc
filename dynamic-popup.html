@@ -32,9 +32,10 @@
             const token = registeredTokenService.getImsToken();
             const assetSelectorProps = {
                 ...imsProps,
+                featureSet: ['content-advisor'],
                 imsToken : token,
             }
-            
+
             const container = document.getElementById('asset-selector');
             PureJSSelectors.renderAssetSelector(container, assetSelectorProps, () => {
                 const assetSelectorDialog = document.getElementById('asset-selector-dialog');
